@@ -1,0 +1,103 @@
+/* 技能条 */
+.skills {
+    margin-bottom: 1.5rem;
+}
+
+.skill {
+    margin-bottom: 1.5rem;
+}
+
+.skill__name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.skill__bar {
+    height: 8px;
+    background-color: #E9ECEF;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill__level {
+    height: 100%;
+    background: linear-gradient(90deg, #007BFF, #0056b3);
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+/* 工作经历 */
+.experience {
+    margin-bottom: 1.5rem;
+}
+
+.experience__item {
+    padding: 1.5rem;
+    background-color: #F8F9FA;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.experience__header {
+    margin-bottom: 1rem;
+}
+
+.experience__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.experience__company {
+    font-weight: 500;
+    color: #007BFF;
+    margin-bottom: 0.25rem;
+}
+
+.experience__date {
+    font-size: 0.875rem;
+    color: #999999;
+}
+
+.experience__description {
+    line-height: 1.6;
+}
+
+/* 教育背景 */
+.education {
+    margin-bottom: 1.5rem;
+}
+
+.education__item {
+    padding: 1.5rem;
+    background-color: #F8F9FA;
+    border-radius: 0.5rem;
+}
+
+.education__degree {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.education__school {
+    font-weight: 500;
+    color: #007BFF;
+    margin-bottom: 0.25rem;
+}
+
+.education__date {
+    font-size: 0.875rem;
+    color: #999999;
+}
+
+/* 适配暗色模式 */
+[data-user-color-scheme="dark"] .skill__bar {
+    background-color: #313344;
+}
+
+[data-user-color-scheme="dark"] .experience__item,
+[data-user-color-scheme="dark"] .education__item {
+    background-color: #25253A;
+}
