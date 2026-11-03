@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="jason liang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、平时点外卖和坐飞机，背后到底在算什么？每天中午 12:00 前后，写字楼下的外卖骑手常会遇到调度难题。一位骑手在商圈刚接下 5 份订单，分别来自 5 家不同的餐厅。这 5 家餐厅分布在商场不同楼层，各自的出餐时间有先有后。5 位顾客留下的收餐地址各不相同，各自承诺的送达时限也在倒数。骑手出发前必须拿定主意：到底先去哪家取餐？取完之后先给谁送？ 如果先去出餐最慢的那家店，手里的另外几单就可能全被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零学运筹 · 第 0 篇：运筹学是什么，光会预测为什么还不够">
+<meta property="og:url" content="https://ljs1124.github.io/2026/11/02/or-00-what-is-or/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、平时点外卖和坐飞机，背后到底在算什么？每天中午 12:00 前后，写字楼下的外卖骑手常会遇到调度难题。一位骑手在商圈刚接下 5 份订单，分别来自 5 家不同的餐厅。这 5 家餐厅分布在商场不同楼层，各自的出餐时间有先有后。5 位顾客留下的收餐地址各不相同，各自承诺的送达时限也在倒数。骑手出发前必须拿定主意：到底先去哪家取餐？取完之后先给谁送？ 如果先去出餐最慢的那家店，手里的另外几单就可能全被">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ljs1124.github.io/img/or/00/cover-v1.jpg">
+<meta property="article:published_time" content="2026-11-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-02T02:00:00.000Z">
+<meta property="article:author" content="jason liang">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ljs1124.github.io/img/or/00/cover-v1.jpg">
+  
+  
+  
+  <title>从零学运筹 · 第 0 篇：运筹学是什么，光会预测为什么还不够 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/about.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ljs1124.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="从零学运筹 · 第 0 篇：运筹学是什么，光会预测为什么还不够"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-11-02 10:00" pubdate>
+          2026年11月2日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">从零学运筹 · 第 0 篇：运筹学是什么，光会预测为什么还不够</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一、平时点外卖和坐飞机，背后到底在算什么？"><a href="#一、平时点外卖和坐飞机，背后到底在算什么？" class="headerlink" title="一、平时点外卖和坐飞机，背后到底在算什么？"></a>一、平时点外卖和坐飞机，背后到底在算什么？</h2><p>每天中午 12:00 前后，写字楼下的外卖骑手常会遇到调度难题。一位骑手在商圈刚接下 5 份订单，分别来自 5 家不同的餐厅。这 5 家餐厅分布在商场不同楼层，各自的出餐时间有先有后。5 位顾客留下的收餐地址各不相同，各自承诺的送达时限也在倒数。骑手出发前必须拿定主意：到底先去哪家取餐？取完之后先给谁送？</p>
+<p>如果先去出餐最慢的那家店，手里的另外几单就可能全被耽误。如果先给距离最近的顾客送餐，后面稍远一些的订单又容易直接超时。怎样排定取送路线，才能在保证所有餐品准时送达的同时，让骑手少跑冤枉路？这是日常外卖配送调度面对的关键问题。</p>
+<p>民航客机的日常调度面对着几乎一样的挑战。一架客机飞完前序航段降落后，航空公司要决定它接下来执飞哪条航线。机组人员的连续工作时间受到规章的严格限制，到点必须轮换休息。如果枢纽机场遭遇雷雨天气，几百架飞机的执飞计划都会被打乱。调度部门必须尽快重新排定每架飞机的起飞次序，尽量减少旅客滞留。</p>
+<p>这两类场景看似隔得很远，背后的调度痛点却完全相同。手头的人力、车辆和时间总是有限的，要处理的事情却非常多。我们必须在各种现实条件的限制下，挑选出一套行得通且综合成本最低的方案。</p>
+<p>在应用数学与工程管理领域，有一门专门研究资源调配的学科。它叫作运筹学（Operations Research，简称 OR）[1]。不少国内技术团队也习惯把相关技术直接称为运筹优化。</p>
+<h2 id="二、靠人工经验和简单规则，为什么很快就不够用了？"><a href="#二、靠人工经验和简单规则，为什么很快就不够用了？" class="headerlink" title="二、靠人工经验和简单规则，为什么很快就不够用了？"></a>二、靠人工经验和简单规则，为什么很快就不够用了？</h2><p>面对派单和排班这类问题，很多人第一反应是靠老师傅的经验，或者定几条简单规则。然而业务规模一旦扩大，这两种方式很快就会遇到瓶颈。</p>
+<h3 id="1-备选方案数量会随任务增加急剧膨胀"><a href="#1-备选方案数量会随任务增加急剧膨胀" class="headerlink" title="1. 备选方案数量会随任务增加急剧膨胀"></a>1. 备选方案数量会随任务增加急剧膨胀</h3><p>如果外卖骑手只需要在 5 个地点之间跑动，可能的行进顺序其实不多。数学上 5 个地点的所有可能排列一共有 120 种。老骑手根据周边路况和自己的经验，在大脑里逐个比较这 120 种走法，还能选出不错的路线。</p>
+<p>一旦任务数量增加，可能的行进顺序就会急剧增加。当需要途经的地点增加到 20 个时，所有可能的排列顺序会变成 20 的阶乘。把这个数字写出来，是 2,432,902,008,176,640,000 种可能。哪怕我们找一台性能出色的计算机，每秒钟能核算 1 亿种方案，也需要连续算上 700 多年才能逐个看完。</p>
+<p>这就是典型的组合爆炸问题。在真实的城市配送网络中，外卖订单量往往很大。只要业务规模稍大一点，单纯靠人工经验或者计算机暴力穷举，就完全算不过来。</p>
+<p><img src="/img/or/00/fig1-explosion.png" srcset="/img/loading.gif" lazyload alt="地点稍一增加，可能的走法就急剧增多"></p>
+<h3 id="2-靠直觉定下的简单规则容易顾此失彼"><a href="#2-靠直觉定下的简单规则容易顾此失彼" class="headerlink" title="2. 靠直觉定下的简单规则容易顾此失彼"></a>2. 靠直觉定下的简单规则容易顾此失彼</h3><p>你可能会问：既然穷举方案走不通，那能不能退一步，靠直觉定几条简单规则？最常见的经验规则就是贪心策略：谁离我最近，我就先送给谁。这类规则表面上挑了耗时最短的动作，实际执行时却容易带来新的问题。</p>
+<p>假设骑手身边 200 米处有一位顾客，送达时限还剩 40 分钟。而在 1.5 公里外有另一位顾客，餐品再过 10 分钟就要超时。如果机械地执行“离谁最近就先送谁”，骑手确实省下了眼前的路程。但是那份更紧急的远距离订单就会严重超时，既会招来顾客投诉，平台也要赔偿违约金。先做好的热饮和饭菜一直闷在保温箱里，顾客拿到手时口感也变差了。</p>
+<p>这种顾此失彼的现象在排班和调度中随处可见。局部最优的动作拼在一起，往往成了一套全局糟糕的方案。运筹优化的作用，就是跳出这种片面的直觉经验。它借助数学模型，在所有合规方案中，快速找出综合效果最好的那一套方案。</p>
+<h2 id="三、运筹优化怎么把复杂的业务问题拆解开？"><a href="#三、运筹优化怎么把复杂的业务问题拆解开？" class="headerlink" title="三、运筹优化怎么把复杂的业务问题拆解开？"></a>三、运筹优化怎么把复杂的业务问题拆解开？</h2><p>现实中的业务规则往往非常琐碎，直接拿来算会让算法无从下手。运筹优化解决问题的第一步，是把业务现场的语言拆成三个基本要素。它们分别是：决策变量、约束条件和目标函数。</p>
+<h3 id="1-决策变量：我们手头到底能决定什么？"><a href="#1-决策变量：我们手头到底能决定什么？" class="headerlink" title="1. 决策变量：我们手头到底能决定什么？"></a>1. 决策变量：我们手头到底能决定什么？</h3><p>决策变量代表手头需要做出的具体行动安排。在优化模型求解之前，这些安排都是待确定的未知数。计算机计算优化模型的过程，就是在寻找这些未知数最合理的取值。</p>
+<p>决策变量通常可以分为两类。第一类是做选择的 0-1 变量（又称二值变量）。比如面对一份新订单，某位特定骑手到底接还是不接？接就记为 1，不接就记为 0。第二类是填具体数值的连续或整数变量。比如给某条重点干线分配几辆货车，或者让某位骑手在 11:45 还是 12:00 出发。</p>
+<p>优化计算最终输出的排班表或派单结果，落到纸面上就是给这些变量填上的确定数字。弄清楚系统到底能主动掌控什么，是建立数学模型的前提。</p>
+<h3 id="2-约束条件：哪些底线绝对不能踩？"><a href="#2-约束条件：哪些底线绝对不能踩？" class="headerlink" title="2. 约束条件：哪些底线绝对不能踩？"></a>2. 约束条件：哪些底线绝对不能踩？</h3><p>约束条件是现实业务中必须遵守的硬性规则。现实世界充满了各种各样的边界，任何决策都不能脱离这些边界随意制定。</p>
+<p>回到外卖配送的场景，常见的约束条件至少包括以下三类：</p>
+<ol>
+<li>物理容量上限：骑手的保温箱体积和载重有限，单次装载的外卖数量不能超过上限。</li>
+<li>服务承诺时限：每笔订单都有承诺给顾客的送达时间，送达时间不能超过规定节点。</li>
+<li>操作先后次序：骑手必须先到餐厅取到餐品，之后才能执行送餐动作。</li>
+</ol>
+<p>约束条件的特点是不能通融。不管一套配送方案看起来多么节省路程，只要有一单餐品在取餐前就被送出，该方案就无法采用。优化模型中的约束条件就像一张筛网，它会直接过滤掉所有不合规的方案。</p>
+<h3 id="3-目标函数：到底拿什么指标来论输赢？"><a href="#3-目标函数：到底拿什么指标来论输赢？" class="headerlink" title="3. 目标函数：到底拿什么指标来论输赢？"></a>3. 目标函数：到底拿什么指标来论输赢？</h3><p>通过约束条件筛网之后，通常还会剩下成千上万种合规方案。在这些合规方案中，我们到底凭什么说方案 A 比方案 B 更好？这就需要用到目标函数。</p>
+<p>目标函数是评判方案优劣的统一标尺。不同的业务场景关注的指标各不相同：外卖配送通常追求总超时时长最短，或者总行车里程最少；干线物流运输通常追求总运费和燃油成本最低；应急救援和医疗抢修则追求响应耗时最短。</p>
+<p>在优化流程中，约束条件负责划定安全红线，目标函数则负责在红线以内权衡输赢。算法会沿着目标函数的指引不断调整决策变量，最终锁定综合表现最好的一套方案。</p>
+<p><img src="/img/or/00/fig2-three-parts-v3.png" srcset="/img/loading.gif" lazyload alt="约束条件筛掉不合规的方案，目标函数在剩下的方案里比出最好的"></p>
+<h2 id="四、同样是算数据，预测和决策有什么分工？"><a href="#四、同样是算数据，预测和决策有什么分工？" class="headerlink" title="四、同样是算数据，预测和决策有什么分工？"></a>四、同样是算数据，预测和决策有什么分工？</h2><p>在数字化业务系统中，“预测”和“决策”是两个经常被混淆的词。很多人以为两者都是在服务器里跑算法，做的事情大概差不多。其实两者在业务链条中分工明确，各自承担着完全不同的任务。</p>
+<h3 id="1-预测负责看历史数据推测未来走势"><a href="#1-预测负责看历史数据推测未来走势" class="headerlink" title="1. 预测负责看历史数据推测未来走势"></a>1. 预测负责看历史数据推测未来走势</h3><p>预测算法的职责，是根据历史数据推算外部世界的走向。例如，机器学习算法可以分析过往单量趋势，结合天气预报与午高峰规律做出推算。假设系统推算：明天中午 11:30 至 13:00 期间，某商圈预计会出现大量外卖订单；如果突降大雨，主要路口的通行速度还会明显变慢。</p>
+<p>预测给出的是客观估计，或者概率分布。但预测结果本身，并不是可以直接执行的行动指令。预测模型不会告诉你，面对可能到来的订单高峰，具体该让哪位骑手去送哪一单。它也不会替调度员决定，到底要从邻近区域提前调拨多少名骑手。</p>
+<h3 id="2-决策负责在已知预测下排定具体行动"><a href="#2-决策负责在已知预测下排定具体行动" class="headerlink" title="2. 决策负责在已知预测下排定具体行动"></a>2. 决策负责在已知预测下排定具体行动</h3><p>决策算法的任务，是在预测结果的基础上，排定具体每一步该怎么做。它需要以预测数据为输入，在有限资源的约束下，计算出一份明确的行动清单。</p>
+<p>面对明天可能出现的订单高峰，决策模型要给出确切答案。比如系统是否需要提前调配骑手到重点写字楼周边，具体调配多少人。系统还要为每位在岗骑手，规划清晰的接单上限和行进路线。决策算法解决的是“我自己该如何应对”的问题。</p>
+<p>不少业务系统会先做预测，再把预测结果交给优化模型。这种协作模式非常清晰：预测负责猜外界变化的大致情况，决策负责定自己手头的资源怎么安排。两者相互配合，系统才能把历史数据，变成高效运转的调度指令。</p>
+<p><img src="/img/or/00/fig3-predict-decide-v2.jpg" srcset="/img/loading.gif" lazyload alt="预测负责猜明天会来多少单，决策负责定手头的骑手怎么安排"></p>
+<h2 id="五、除了外卖和民航，生活中还有哪些地方在用运筹优化？"><a href="#五、除了外卖和民航，生活中还有哪些地方在用运筹优化？" class="headerlink" title="五、除了外卖和民航，生活中还有哪些地方在用运筹优化？"></a>五、除了外卖和民航，生活中还有哪些地方在用运筹优化？</h2><p>很多人平时感知不到运筹优化的存在，但现代社会的很多运转环节都在使用它。除了外卖派单和航班排班，许多行业也在依靠运筹优化，解决复杂的管理问题。</p>
+<p>在仓储管理与物流配送中，货位摆放和装车顺序直接影响作业效率。大型电商仓库内部有成千上万个货位。如果把畅销商品放在出库口附近，拣货人员每天就能少走很多路。货车装载时，既要遵守车厢载重上限，又要考虑站点的卸货次序。如果先送的货物被压在最里侧，司机每次卸货，就要先搬开外侧的货物。</p>
+<p>在工业制造与产线排产中，细微的调度差异会直接影响工厂的利润。在钢板切割与布料裁剪中，运筹算法可以通过精细的排版组合，尽量减少边缘废料。在汽车装配线上，一条产线往往要混流组装多种配置的车型。如果合理编排不同车型的上线次序，就能减少喷漆换色和模具切换的停机等待时间。</p>
+<p>在城市公共服务领域，运筹优化也用得很广。大型医院需要根据手术预估时长与病情缓急，排定手术室日程。城市电网每天都要根据用电高低峰，安排不同发电机组的启停计划。发电机组启停一次需要消耗大量燃料，合理的启停调度可以有效降低运行成本。</p>
+<p>这些场景虽然所属行业各异，背后的问题逻辑却完全一致。只要面临有限的资源、繁杂的规则和海量的组合，运筹优化就能发挥作用。</p>
+<h2 id="六、写在最后：现场规则怎么变成计算机能算的公式？"><a href="#六、写在最后：现场规则怎么变成计算机能算的公式？" class="headerlink" title="六、写在最后：现场规则怎么变成计算机能算的公式？"></a>六、写在最后：现场规则怎么变成计算机能算的公式？</h2><p>了解了运筹优化的基本概念之后，你可能会问：既然运筹优化很有用，工程师该怎么把现场规矩写进计算机？这也是本专栏接下来要系统探讨的内容。</p>
+<p>我们不会从抽象的数学定理推导切入。专栏的重点是带你掌握一套实用的工程方法：怎样把现场的业务痛点拆解成模型，并用主流工具求解。</p>
+<p>下一篇文章中，我们将以生鲜冷链仓库的分拣任务为例展开讨论。我们会带你把现场口头要求，一步步翻译成标准的数学公式。现场有两条明确的硬性规则：每个工位在当前批次里最多工作 80 分钟；一个工位不能同时接两票出库单（否则容易跑冷气，传送带也容易结霜）。</p>
+<p>通过这套具体案例，专栏将正式引入 MILP（Mixed Integer Linear Programming，混合整数线性规划）的具体实战 [2][3]。</p>
+<h2 id="七、参考文献与延伸阅读"><a href="#七、参考文献与延伸阅读" class="headerlink" title="七、参考文献与延伸阅读"></a>七、参考文献与延伸阅读</h2><p>[1] Hillier, F. S., &amp; Lieberman, G. J. <em>Introduction to Operations Research</em>. McGraw-Hill.</p>
+<p>[2] Williams, H. P. <em>Model Building in Mathematical Programming</em>. Wiley.</p>
+<p>[3] Bertsimas, D., &amp; Tsitsiklis, J. N. <em>Introduction to Linear Optimization</em>. Athena Scientific.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BB%8E%E9%9B%B6%E5%AD%A6%E8%BF%90%E7%AD%B9/" class="category-chain-item">从零学运筹</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>从零学运筹 · 第 0 篇：运筹学是什么，光会预测为什么还不够</div>
+      <div>https://ljs1124.github.io/2026/11/02/or-00-what-is-or/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>jason liang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年11月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/11/03/or-01-milp/" title="从零学运筹 · 第 1 篇：MILP 入门，业务怎么翻成求解器语言">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">从零学运筹 · 第 1 篇：MILP 入门，业务怎么翻成求解器语言</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/14/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
